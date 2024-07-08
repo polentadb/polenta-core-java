@@ -2,37 +2,26 @@ package com.polenta.core.data;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Row {
 	
-	private Map<String, Object> columns = new LinkedHashMap<String, Object>();
-	
-	public Row() {
-		
-	}
-	
-	public Row(Map<String, Object> columns) {
+	private Map<String, Value> columns = new LinkedHashMap<>();
+
+	public Row() {}
+
+	public Row(Map<String, Value> columns) {
 		this.columns.putAll(columns);
 	}
 	
-	public void set(String column, Object value) {
+	public void set(String column, Value value) {
 		columns.put(column, value);
 	}
 	
-	public Object get(String column) {
+	public Value get(String column) {
 		return columns.get(column);
 	}
-	
-	public void clear() {
-		this.columns.clear();
-	}
 
-	public Set<String> columnsSet() {
-		return columns.keySet();
-	}
-	
-	public Map<String, Object> asMap() {
+	public Map<String, Value> asMap() {
 		return columns;
 	}
 	

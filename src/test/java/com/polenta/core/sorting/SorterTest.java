@@ -1,6 +1,7 @@
 package com.polenta.core.sorting;
 
 import com.polenta.core.data.Row;
+import com.polenta.core.data.StringValue;
 import org.junit.Test;
 
 import java.util.List;
@@ -75,7 +76,7 @@ public class SorterTest {
 		map1.set("NAME", null);
 
 		Row map2 = new Row();
-		map2.set("NAME", "A");
+		map2.set("NAME", new StringValue("A"));
 		
 		int compare = sorter.compare(map1, map2, "NAME");
 		assertEquals(-1,  compare);
@@ -89,7 +90,7 @@ public class SorterTest {
 		map1.set("NAME", null);
 
 		Row map2 = new Row();
-		map2.set("NAME", "A");
+		map2.set("NAME", new StringValue("A"));
 		
 		int compare = sorter.compare(map1, map2, "NAME DESC");
 		assertEquals(1,  compare);
@@ -100,7 +101,7 @@ public class SorterTest {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "A");
+		map1.set("NAME", new StringValue("A"));
 
 		Row map2 = new Row();
 		map2.set("NAME", null);
@@ -114,7 +115,7 @@ public class SorterTest {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "A");
+		map1.set("NAME", new StringValue("A"));
 
 		Row map2 = new Row();
 		map2.set("NAME", null);
@@ -128,24 +129,24 @@ public class SorterTest {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "A");
+		map1.set("NAME", new StringValue("A"));
 
 		Row map2 = new Row();
-		map2.set("NAME", "Z");
+		map2.set("NAME", new StringValue("Z"));
 
 		int compare = sorter.compare(map1, map2, "NAME");
 		assertTrue(compare < 0);
 	}
 	
 	@Test
-	public void testCompareAtoZDesx() throws Exception {
+	public void testCompareAtoZDesc() throws Exception {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "A");
+		map1.set("NAME", new StringValue("A"));
 
 		Row map2 = new Row();
-		map2.set("NAME", "Z");
+		map2.set("NAME", new StringValue("Z"));
 
 		int compare = sorter.compare(map1, map2, "NAME DESC");
 		assertTrue(compare > 0);
@@ -156,24 +157,24 @@ public class SorterTest {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "Z");
+		map1.set("NAME", new StringValue("Z"));
 
 		Row map2 = new Row();
-		map2.set("NAME", "A");
+		map2.set("NAME", new StringValue("A"));
 		
 		int compare = sorter.compare(map1, map2, "NAME");
 		assertTrue(compare > 0);
 	}
 	
 	@Test
-	public void testCompareZtoADesx() throws Exception {
+	public void testCompareZtoADesc() throws Exception {
 		GenericSorter sorter = new GenericSorter();
 		
 		Row map1 = new Row();
-		map1.set("NAME", "Z");
+		map1.set("NAME", new StringValue("Z"));
 
 		Row map2 = new Row();
-		map2.set("NAME", "A");
+		map2.set("NAME", new StringValue("A"));
 
 		int compare = sorter.compare(map1, map2, "NAME DESC");
 		assertTrue(compare < 0);

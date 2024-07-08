@@ -3,6 +3,7 @@ package com.polenta.core.executor.impl;
 import com.polenta.core.catalog.Catalog;
 import com.polenta.core.catalog.CatalogItem;
 import com.polenta.core.data.ResultSet;
+import com.polenta.core.data.Value;
 import com.polenta.core.exception.InvalidStatementException;
 import com.polenta.core.exception.PolentaException;
 import com.polenta.core.executor.StatementExecutor;
@@ -19,7 +20,7 @@ public class SelectExecutor implements StatementExecutor {
 	public Map<String, Object> execute(String statement) throws PolentaException {
 		String objectName = extractObjectName(statement);
 		if (objectName == null) {
-			throw new InvalidStatementException("SELECT statement must have a FROM clausule");
+			throw new InvalidStatementException("SELECT statement must have a FROM clause");
 		}
 		
 		CatalogItem catalogItem = Catalog.getInstance().get(objectName);  
@@ -33,7 +34,7 @@ public class SelectExecutor implements StatementExecutor {
 			throw new InvalidStatementException("SELECT must list fields to be returned.");
 		}
 		
-		Map<String, Object> whereConditions = extractWhereConditions();
+		Map<String, Value> whereConditions = extractWhereConditions();
 		
 		List<String> orderByFields = extractOrderByFields(statement);
 		if (orderByFields.size() > 1) {
@@ -63,13 +64,13 @@ public class SelectExecutor implements StatementExecutor {
 	
 	protected String extractObjectName(String statement) throws PolentaException {
 		try {
-			if (statement.indexOf("FROM") == -1) {
+			if (!statement.contains("FROM")) {
 				return null;
-			} else if ((statement.indexOf("WHERE") == -1) && (statement.indexOf("ORDER BY") == -1)) {
+			} else if ((!statement.contains("WHERE")) && (!statement.contains("ORDER BY"))) {
 				return statement.substring(statement.indexOf("FROM") + 5).trim();
-			} else if ((statement.indexOf("WHERE") > 0) && (statement.indexOf("ORDER BY") == -1)) {
+			} else if ((statement.indexOf("WHERE") > 0) && (!statement.contains("ORDER BY"))) {
 				return statement.substring(statement.indexOf("FROM") + 5, statement.indexOf("WHERE")).trim();
-			} else if ((statement.indexOf("WHERE") == -1) && (statement.indexOf("ORDER BY") > 0)) {
+			} else if ((!statement.contains("WHERE")) && (statement.indexOf("ORDER BY") > 0)) {
 				return statement.substring(statement.indexOf("FROM") + 5, statement.indexOf("ORDER BY")).trim();
 			} else if ((statement.indexOf("WHERE") > 0) && (statement.indexOf("ORDER BY") > 0)) {
 				return statement.substring(statement.indexOf("FROM") + 5, statement.indexOf("WHERE")).trim();
@@ -93,8 +94,8 @@ public class SelectExecutor implements StatementExecutor {
 		return fields;
 	}
 
-	protected Map<String, Object> extractWhereConditions() throws PolentaException {
-		Map<String, Object> conditions = new LinkedHashMap<String, Object>();
+	protected Map<String, Value> extractWhereConditions() throws PolentaException {
+		Map<String, Value> conditions = new LinkedHashMap<>();
 		return conditions;
 	}
 

@@ -22,8 +22,6 @@ public class StatementParser {
 			return StatementType.INSERT;
 		} else if (word1.equalsIgnoreCase("SELECT")) {
 			return StatementType.SELECT;
-		} else if (word1.equalsIgnoreCase("SHUTDOWN")) {
-			return StatementType.SHUTDOWN;
 		} else if (word1.equalsIgnoreCase("UPDATE")) {
 			return StatementType.UPDATE;
 		} else {

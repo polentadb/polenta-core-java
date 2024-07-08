@@ -4,6 +4,7 @@ import com.polenta.core.catalog.Catalog;
 import com.polenta.core.catalog.CatalogItem;
 import com.polenta.core.data.DataType;
 import com.polenta.core.data.Row;
+import com.polenta.core.data.Value;
 import com.polenta.core.exception.InvalidStatementException;
 import com.polenta.core.exception.PolentaException;
 import com.polenta.core.executor.StatementExecutor;
@@ -11,6 +12,7 @@ import com.polenta.core.object.behavior.Insertable;
 import com.polenta.core.store.Store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +44,17 @@ public class InsertExecutor implements StatementExecutor {
 		
 		validateFieldNames(fields, catalogItem);
 		
-		List<Object> convertedFields = convertFields(fields, values, catalogItem);
-		
-		Row newRow = new Row();
+		List<Value> convertedFields = convertFields(fields, values, catalogItem);
+
+		Map<String, Value> map = new HashMap<>();
+
 		
 		for (int i = 0; i <= fields.size() - 1; i++) {
-			newRow.set(fields.get(i), convertedFields.get(i));
+			map.put(fields.get(i), convertedFields.get(i));
 		}
-		
+
+		Row newRow = new Row(map);
+
 		try {
 			((Insertable)Store.getInstance().get(objectName)).insert(newRow);
 		} catch (ClassCastException e) {
@@ -95,8 +100,8 @@ public class InsertExecutor implements StatementExecutor {
 		}
 	}	
 	
-	public List<Object> convertFields(List<String> fields, List<String> values, CatalogItem catalogItem) throws PolentaException {
-		List<Object> valuesList = new ArrayList<Object>();
+	public List<Value> convertFields(List<String> fields, List<String> values, CatalogItem catalogItem) throws PolentaException {
+		List<Value> valuesList = new ArrayList<>();
 		
 		for (int i = 0; i <= fields.size() - 1; i++) {
 			String field = fields.get(i);

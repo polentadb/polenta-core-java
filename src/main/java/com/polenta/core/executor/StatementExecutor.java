@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface StatementExecutor {
 
-	public Map<String, Object> execute(String statement) throws PolentaException;
+	Map<String, Object> execute(String statement) throws PolentaException;
 
-	default public Map<String, Object> success() {
+	default Map<String, Object> success() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("STATUS", "SUCCESS");
 		return map;

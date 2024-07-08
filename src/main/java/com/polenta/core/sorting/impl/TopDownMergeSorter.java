@@ -22,15 +22,15 @@ public class TopDownMergeSorter extends Sorter {
 		if (higher <= lower) {
 			return;
 		}
-		int middle = lower + (higher - lower) / 2;
+		var middle = lower + (higher - lower) / 2;
 		sort(list, criteria, lower, middle);
 		sort(list, criteria, middle + 1, higher);
 		merge(list, criteria, lower, middle, higher);
 	}
 
 	protected void merge(List<Row> list, String criteria, int lower, int middle, int higher) throws PolentaException {
-		int i = lower;
-		int j = middle + 1;
+		var i = lower;
+		var j = middle + 1;
 		
 		for (int k = lower; k <= higher; k++) {
 			aux[k] = list.get(k);

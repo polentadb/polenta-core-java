@@ -6,7 +6,6 @@ import com.polenta.core.executor.impl.DeleteExecutor;
 import com.polenta.core.executor.impl.DropExecutor;
 import com.polenta.core.executor.impl.InsertExecutor;
 import com.polenta.core.executor.impl.SelectExecutor;
-import com.polenta.core.executor.impl.ShutDownExecutor;
 import com.polenta.core.executor.impl.UpdateExecutor;
 
 public class StatementExecutorBuilder {
@@ -36,8 +35,6 @@ public class StatementExecutorBuilder {
 			command = new InsertExecutor();
 		} else if (commandType == StatementType.SELECT) {
 			command = new SelectExecutor();
-		} else if (commandType == StatementType.SHUTDOWN) {
-			command = new ShutDownExecutor();
 		} else if (commandType == StatementType.UPDATE) {
 			command = new UpdateExecutor();
 		} else {

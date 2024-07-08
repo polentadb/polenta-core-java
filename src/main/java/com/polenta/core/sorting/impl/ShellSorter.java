@@ -9,7 +9,7 @@ import java.util.List;
 public class ShellSorter extends Sorter {
 
 	public List<Row> sort(List<Row> list, String criteria) throws PolentaException {
-		int h = 1;
+		var h = 1;
 		while (h < (list.size() / 3)) { 
 			h = (h * 3) + 1;
 		}

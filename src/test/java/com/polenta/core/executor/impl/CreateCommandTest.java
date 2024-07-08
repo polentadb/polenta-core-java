@@ -14,7 +14,7 @@ public class CreateCommandTest {
 	public void testCreateBagExtractDefinitions() throws Exception {
 		CreateExecutor command = new CreateExecutor();
 		
-		Map<String, DataType> map = command.extractObjectDefinitions("CREATE BAG (NAME STRING, BIRTH DATE, ZIP INTEGER, SALARY DOUBLE)");
+		Map<String, DataType> map = command.extractObjectDefinitions("CREATE BAG (NAME STRING, BIRTH DATE, ZIP INTEGER, SALARY FLOAT)");
 		
 		assertEquals(4, map.size());
 		
@@ -26,7 +26,7 @@ public class CreateCommandTest {
 		assertEquals(DataType.STRING, map.get("NAME"));
 		assertEquals(DataType.DATE, map.get("BIRTH"));
 		assertEquals(DataType.INTEGER, map.get("ZIP"));
-		assertEquals(DataType.DOUBLE, map.get("SALARY"));
+		assertEquals(DataType.FLOAT, map.get("SALARY"));
 	}
 	
 }

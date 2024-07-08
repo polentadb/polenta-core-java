@@ -15,7 +15,7 @@ public class SortingExecutor {
 			throw new PolentaException("ORDER BY requires fields.");
 		}
 
-		Sorter sorter = buildSorter(unsorted);
+		var sorter = buildSorter(unsorted);
 		
 		if (sorter != null) {
 			return sorter.sort(unsorted, criteria);
@@ -25,7 +25,7 @@ public class SortingExecutor {
 	}
 	
 	private static Sorter buildSorter(List<Row> unsorted) {
-		int size = unsorted.size();
+		var size = unsorted.size();
 		if (size <= 10) {
 			return new SelectionSorter();
 		} else if (size <= 50) {
